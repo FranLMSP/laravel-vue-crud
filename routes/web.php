@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('dashboard');
 });
+
+//Name of the route and the name of the controller
+//This will create every HTTP method we need
+//Excluding the "show" route
+Route::resource('tasks', 'TaskController', ['except' => 'show']);
