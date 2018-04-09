@@ -20,9 +20,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td width="10px">1</td>
-                    <td>First task</td>
+                <tr v-for="keep in keeps">
+                    <td width="10px">@{{ keep.id }}</td>
+                    <td>@{{ keep.keep }}</td>
                     <td width="10px">
                         <a class="btn btn-warning btn-sm">Edit</a>
                     </td>
