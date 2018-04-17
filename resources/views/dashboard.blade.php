@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-sm-7">
-        <a href="#" class="btn btn-primary pull-right">New Task</a>
+        <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">New Task</a>
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
@@ -32,6 +32,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div>
+            @include('create')
+        </div>
     </div>
 
     <div class="col-sm-5">
