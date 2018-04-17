@@ -18,4 +18,4 @@ Route::get('/', function () {
 //Name of the route and the name of the controller
 //This will create every HTTP method we need
 //Excluding the "show" route
-Route::resource('tasks', 'TaskController', ['except' => 'show']);
+Route::resource('tasks', 'TaskController', ['except' => ['show', 'create']]);
