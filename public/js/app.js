@@ -27368,7 +27368,21 @@ const vm = new Vue({
 			$('#edit').modal('show');
 		},
 		updateKeep: function(id) {
-			alert(id);
+			const url = 'tasks/' + id;
+
+			axios.put(url, this.fillKeep).then( response => {
+				this.getKeeps();
+				this.fillKeep = {
+					id: '',
+					keep: ''
+				};
+				this.errors = [];
+
+				$('#edit').modal('hide');
+				toastr.success('Editet correctly');
+			}).catch( error => {
+				this.errors = error.response.data;
+			});
 		}
 	}
 });
