@@ -24,7 +24,7 @@
                     <td width="10px">@{{ keep.id }}</td>
                     <td>@{{ keep.keep }}</td>
                     <td width="10px">
-                        <a class="btn btn-warning btn-sm">Edit</a>
+                        <a class="btn btn-warning btn-sm" v-on:click.prevent="editKeep(keep)">Edit</a>
                     </td>
                     <td width="10px">
                         <a class="btn btn-danger btn-sm" v-on:click.prevent="deleteKeep(keep)">Delete</a>
@@ -35,6 +35,7 @@
 
         <div>
             @include('create')
+            @include('edit')
         </div>
     </div>
 
