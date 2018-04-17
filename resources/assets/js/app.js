@@ -13,7 +13,7 @@ const vm = new Vue({
 		getKeeps: function() {
 			const url = 'tasks';
 			axios.get(url).then( response => {
-				this.keeps = response.data;
+				this.keeps = response.data.tasks.data;
 			}).catch(error => {
 				toastr.error('Error listing the tasks!');
 				console.log(error);
