@@ -4,16 +4,54 @@ const vm = new Vue({
 		this.getKeeps();
 	},
 	data: {
+		offset: 5,
 		keeps: [],
 		newKeep: '',
+		pagination: {
+			total        :0,
+			current_page :0,
+			per_page     :0,
+			last_page    :0,
+			from         :0,
+			to           :0
+		},
 		fillKeep: {id: '', keep: ''},
 		errors: []
 	},
+	computed: {
+		isActived: function() {
+			return this.pagination.current_page;
+		},
+		pagesNumber: function() {
+			if (!this.pagination.to){
+				return [];
+			}
+
+			let from = this.pagination.current_page - this.offset;
+			if(from < 1){
+				from = 1;
+			}
+
+			let to = from + (this.offset * 2);
+			if(to >= this.pagination.last_page){
+				to = this.pagination.last_page;
+			}
+
+			let pagesArray = [];
+			while(from <= to){
+				pagesArray.push(from);
+				from++;
+			}
+
+			return pagesArray;
+		}
+	},
 	methods: {
-		getKeeps: function() {
-			const url = 'tasks';
+		getKeeps: function(page) {
+			const url = 'tasks?page='+page;
 			axios.get(url).then( response => {
 				this.keeps = response.data.tasks.data;
+				this.pagination = response.data.pagination;
 			}).catch(error => {
 				toastr.error('Error listing the tasks!');
 				console.log(error);
@@ -65,6 +103,10 @@ const vm = new Vue({
 			}).catch( error => {
 				this.errors = error.response.data;
 			});
+		},
+		changePage: function(page){
+			this.pagination.current_page = page;
+			this.getKeeps(page);
 		}
 	}
 });
